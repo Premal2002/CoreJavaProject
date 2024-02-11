@@ -1,2 +1,0 @@
-# CoreJavaProject
-Product Management System
