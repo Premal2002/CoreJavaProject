@@ -1,0 +1,650 @@
+Enter password: ****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 8
+Server version: 8.0.36 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2024, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| assignment         |
+| hr                 |
+| information_schema |
+| jdbchw             |
+| mydb               |
+| mysql              |
+| performance_schema |
+| sakila             |
+| sys                |
+| world              |
++--------------------+
+10 rows in set (0.05 sec)
+
+mysql> create database project;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select database;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+mysql> select database as db;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'as db' at line 1
+mysql> select database() as db;
++------+
+| db   |
++------+
+| NULL |
++------+
+1 row in set (0.00 sec)
+
+mysql> use project;
+Database changed
+mysql> select database() as db;
++---------+
+| db      |
++---------+
+| project |
++---------+
+1 row in set (0.00 sec)
+
+mysql> create table admin(admin_id int primary key,admin_username varchar(25) not null unique,password varchar(30) not null);
+Query OK, 0 rows affected (0.08 sec)
+
+mysql> desc admin;
++----------------+-------------+------+-----+---------+-------+
+| Field          | Type        | Null | Key | Default | Extra |
++----------------+-------------+------+-----+---------+-------+
+| admin_id       | int         | NO   | PRI | NULL    |       |
+| admin_username | varchar(25) | NO   | UNI | NULL    |       |
+| password       | varchar(30) | NO   |     | NULL    |       |
++----------------+-------------+------+-----+---------+-------+
+3 rows in set (0.02 sec)
+
+mysql> insert into admin(112,'Premal09','Premal12345');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '112,'Premal09','Premal12345')' at line 1
+mysql> insert into admin values(111,'Premal09','Premal12345');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from admin;
++----------+----------------+-------------+
+| admin_id | admin_username | password    |
++----------+----------------+-------------+
+|      111 | Premal09       | Premal12345 |
++----------+----------------+-------------+
+1 row in set (0.00 sec)
+
+mysql> create table customer(customer_id int primary key,customer_username varchar(25) not null unique,password varchar(30) not null,customer_email varchar(30) unique,customer_name varchar(50) not null,customer_address varchar(25));
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> desc customer;
++-------------------+-------------+------+-----+---------+-------+
+| Field             | Type        | Null | Key | Default | Extra |
++-------------------+-------------+------+-----+---------+-------+
+| customer_id       | int         | NO   | PRI | NULL    |       |
+| customer_username | varchar(25) | NO   | UNI | NULL    |       |
+| password          | varchar(30) | NO   |     | NULL    |       |
+| customer_email    | varchar(30) | YES  | UNI | NULL    |       |
+| customer_name     | varchar(50) | NO   |     | NULL    |       |
+| customer_address  | varchar(25) | YES  |     | NULL    |       |
++-------------------+-------------+------+-----+---------+-------+
+6 rows in set (0.00 sec)
+
+mysql> create table manager(manager_id int primary key,manager_username varchar(25) not null unique,password varchar(30) not null,manager_email varchar(30) unique,manager_name varchar(50) not null)
+    -> ;
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> desc manager;
++------------------+-------------+------+-----+---------+-------+
+| Field            | Type        | Null | Key | Default | Extra |
++------------------+-------------+------+-----+---------+-------+
+| manager_id       | int         | NO   | PRI | NULL    |       |
+| manager_username | varchar(25) | NO   | UNI | NULL    |       |
+| password         | varchar(30) | NO   |     | NULL    |       |
+| manager_email    | varchar(30) | YES  | UNI | NULL    |       |
+| manager_name     | varchar(50) | NO   |     | NULL    |       |
++------------------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> create table products(product_id int primary key,product_name varchar(25) not null unique,product_desc varchar(50),product_category varchar(30),product_price int,product_quantity int);
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> desc products;
++------------------+-------------+------+-----+---------+-------+
+| Field            | Type        | Null | Key | Default | Extra |
++------------------+-------------+------+-----+---------+-------+
+| product_id       | int         | NO   | PRI | NULL    |       |
+| product_name     | varchar(25) | NO   | UNI | NULL    |       |
+| product_desc     | varchar(50) | YES  |     | NULL    |       |
+| product_category | varchar(30) | YES  |     | NULL    |       |
+| product_price    | int         | YES  |     | NULL    |       |
+| product_quantity | int         | YES  |     | NULL    |       |
++------------------+-------------+------+-----+---------+-------+
+6 rows in set (0.00 sec)
+
+mysql> create show databases;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'show databases' at line 1
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| assignment         |
+| hr                 |
+| information_schema |
+| jdbchw             |
+| mydb               |
+| mysql              |
+| performance_schema |
+| project            |
+| sakila             |
+| sys                |
+| world              |
++--------------------+
+11 rows in set (0.00 sec)
+
+mysql> use mydb;
+Database changed
+mysql> create table test(Student blob);
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> desc test;
++---------+------+------+-----+---------+-------+
+| Field   | Type | Null | Key | Default | Extra |
++---------+------+------+-----+---------+-------+
+| Student | blob | YES  |     | NULL    |       |
++---------+------+------+-----+---------+-------+
+1 row in set (0.00 sec)
+
+mysql> desc test;
++---------+------+------+-----+---------+-------+
+| Field   | Type | Null | Key | Default | Extra |
++---------+------+------+-----+---------+-------+
+| Student | blob | YES  |     | NULL    |       |
++---------+------+------+-----+---------+-------+
+1 row in set (0.00 sec)
+
+mysql> select * from test;
++------------------------------------------------------------+
+| Student                                                    |
++------------------------------------------------------------+
+| 0x5B4C746573747061636B2E53747564656E743B403731323632356664 |
++------------------------------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> use project;
+Database changed
+mysql> use mydb;
+Database changed
+mysql> select * from test;
++------------------------------------------------------------+
+| Student                                                    |
++------------------------------------------------------------+
+| 0x5B4C746573747061636B2E53747564656E743B403731323632356664 |
++------------------------------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> delete from test;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from test;
++--------------------------+
+| Student                  |
++--------------------------+
+| 0x5B42403237363765323363 |
++--------------------------+
+1 row in set (0.00 sec)
+
+mysql> desc test;
++---------+------+------+-----+---------+-------+
+| Field   | Type | Null | Key | Default | Extra |
++---------+------+------+-----+---------+-------+
+| Student | blob | YES  |     | NULL    |       |
++---------+------+------+-----+---------+-------+
+1 row in set (0.00 sec)
+
+mysql> CREATE TABLE serialized_objects (
+    ->     id INT PRIMARY KEY,
+    ->     data BLOB
+    -> );
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> desc serialized_objects;
++-------+------+------+-----+---------+-------+
+| Field | Type | Null | Key | Default | Extra |
++-------+------+------+-----+---------+-------+
+| id    | int  | NO   | PRI | NULL    |       |
+| data  | blob | YES  |     | NULL    |       |
++-------+------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+
+mysql> select * from serialized_objects;
++----+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| id | data                                                                                                                                                                       |
++----+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+|  1 | 0xACED000573720010746573747061636B2E4D79436C617373CFF8E7B3C80065BA02000249000269644C00046E616D657400124C6A6176612F6C616E672F537472696E673B7870000000017400074578616D706C65 |
+|  2 | 0xACED000573720010746573747061636B2E4D79436C617373CFF8E7B3C80065BA02000249000269644C00046E616D657400124C6A6176612F6C616E672F537472696E673B7870000000027400074578616D706C65 |
++----+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+2 rows in set (0.00 sec)
+
+mysql> select * from serialized_objects;
++----+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| id | data                                                                                                                                                                                                                                                                                     |
++----+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+|  1 | 0xACED000573720010746573747061636B2E4D79436C617373CFF8E7B3C80065BA02000249000269644C00046E616D657400124C6A6176612F6C616E672F537472696E673B7870000000017400074578616D706C65                                                                                                               |
+|  2 | 0xACED000573720010746573747061636B2E4D79436C617373CFF8E7B3C80065BA02000249000269644C00046E616D657400124C6A6176612F6C616E672F537472696E673B7870000000027400074578616D706C65                                                                                                               |
+|  3 | 0xACED000573720010746573747061636B2E4D79436C617373CFF8E7B3C80065BA02000249000269644C00046E616D657400124C6A6176612F6C616E672F537472696E673B7870000000037400074578616D706C65                                                                                                               |
+|  4 | 0xACED0005757200135B4C746573747061636B2E4D79436C6173733B80909BAA70A52F7102000078700000000273720010746573747061636B2E4D79436C617373CFF8E7B3C80065BA02000249000269644C00046E616D657400124C6A6176612F6C616E672F537472696E673B7870000000047400074578616D706C657371007E00020000000571007E0005 |
++----+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+4 rows in set (0.00 sec)
+
+mysql> delete from serialized_objects where id <> 4;
+Query OK, 3 rows affected (0.01 sec)
+
+mysql> select * from serialized_objects;
++----+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| id | data                                                                                                                                                                                                                                                                                     |
++----+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+|  4 | 0xACED0005757200135B4C746573747061636B2E4D79436C6173733B80909BAA70A52F7102000078700000000273720010746573747061636B2E4D79436C617373CFF8E7B3C80065BA02000249000269644C00046E616D657400124C6A6176612F6C616E672F537472696E673B7870000000047400074578616D706C657371007E00020000000571007E0005 |
++----+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> delete from test;
+Query OK, 2 rows affected (0.01 sec)
+
+mysql> select * from test;
+Empty set (0.00 sec)
+
+mysql> select * from test;
++--------------------------+
+| Student                  |
++--------------------------+
+| 0x5B42403237363765323363 |
++--------------------------+
+1 row in set (0.00 sec)
+
+mysql> select * from test;
++--------------------------+
+| Student                  |
++--------------------------+
+| 0x5B42403237363765323363 |
+| 0x5B42403237363765323363 |
++--------------------------+
+2 rows in set (0.00 sec)
+
+mysql> delete from serialized_objects where id <> 4;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> delete from test;
+Query OK, 2 rows affected (0.00 sec)
+
+mysql> select * from test;
+Empty set (0.00 sec)
+
+mysql> use project;
+Database changed
+mysql> desc admin;
++----------------+-------------+------+-----+---------+-------+
+| Field          | Type        | Null | Key | Default | Extra |
++----------------+-------------+------+-----+---------+-------+
+| admin_id       | int         | NO   | PRI | NULL    |       |
+| admin_username | varchar(25) | NO   | UNI | NULL    |       |
+| password       | varchar(30) | NO   |     | NULL    |       |
++----------------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> desc products;
++------------------+-------------+------+-----+---------+-------+
+| Field            | Type        | Null | Key | Default | Extra |
++------------------+-------------+------+-----+---------+-------+
+| product_id       | int         | NO   | PRI | NULL    |       |
+| product_name     | varchar(25) | NO   | UNI | NULL    |       |
+| product_desc     | varchar(50) | YES  |     | NULL    |       |
+| product_category | varchar(30) | YES  |     | NULL    |       |
+| product_price    | int         | YES  |     | NULL    |       |
+| product_quantity | int         | YES  |     | NULL    |       |
++------------------+-------------+------+-----+---------+-------+
+6 rows in set (0.00 sec)
+
+mysql> alter table products set product_id int auto_increment = 10000;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'set product_id int auto_increment = 10000' at line 1
+mysql> alter table products product_id int auto_increment = 10000;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'product_id int auto_increment = 10000' at line 1
+mysql> alter table products modify product_id int auto_increment = 10000;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '= 10000' at line 1
+mysql> alter table products modify column product_id int auto_increment = 10000;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '= 10000' at line 1
+mysql> alter table products modify column product_id int auto_increment;
+Query OK, 0 rows affected (0.15 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table products auto_increment = 10000;
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc products;
++------------------+-------------+------+-----+---------+----------------+
+| Field            | Type        | Null | Key | Default | Extra          |
++------------------+-------------+------+-----+---------+----------------+
+| product_id       | int         | NO   | PRI | NULL    | auto_increment |
+| product_name     | varchar(25) | NO   | UNI | NULL    |                |
+| product_desc     | varchar(50) | YES  |     | NULL    |                |
+| product_category | varchar(30) | YES  |     | NULL    |                |
+| product_price    | int         | YES  |     | NULL    |                |
+| product_quantity | int         | YES  |     | NULL    |                |
++------------------+-------------+------+-----+---------+----------------+
+6 rows in set (0.00 sec)
+
+mysql> select * from products;
+Empty set (0.00 sec)
+
+mysql> show tables;
++-------------------+
+| Tables_in_project |
++-------------------+
+| admin             |
+| customer          |
+| manager           |
+| products          |
++-------------------+
+4 rows in set (0.01 sec)
+
+mysql> desc manager;
++------------------+-------------+------+-----+---------+-------+
+| Field            | Type        | Null | Key | Default | Extra |
++------------------+-------------+------+-----+---------+-------+
+| manager_id       | int         | NO   | PRI | NULL    |       |
+| manager_username | varchar(25) | NO   | UNI | NULL    |       |
+| password         | varchar(30) | NO   |     | NULL    |       |
+| manager_email    | varchar(30) | YES  | UNI | NULL    |       |
+| manager_name     | varchar(50) | NO   |     | NULL    |       |
++------------------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> select * from manager;
++------------+------------------+-------------+------------------+--------------+
+| manager_id | manager_username | password    | manager_email    | manager_name |
++------------+------------------+-------------+------------------+--------------+
+|       1111 | Sanket09         | Sanket12345 | sanket@gmail.com | Sanket       |
++------------+------------------+-------------+------------------+--------------+
+1 row in set (0.00 sec)
+
+mysql> create table manager_reports(r_id int primary Key auto_increment(5000),r_message varchar(50) not null);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '(5000),r_message varchar(50) not null)' at line 1
+mysql> create table manager_reports(r_id int primary Key auto_increment=5000,r_message varchar(50) not null);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '=5000,r_message varchar(50) not null)' at line 1
+mysql> create table manager_reports(r_id int primary Key auto_increment,r_message varchar(50) not null);
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> alter table manager_report auto_increment = 5000;
+ERROR 1146 (42S02): Table 'project.manager_report' doesn't exist
+mysql> alter table manager_reports auto_increment = 5000;
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc manager_reports;
++-----------+-------------+------+-----+---------+----------------+
+| Field     | Type        | Null | Key | Default | Extra          |
++-----------+-------------+------+-----+---------+----------------+
+| r_id      | int         | NO   | PRI | NULL    | auto_increment |
+| r_message | varchar(50) | NO   |     | NULL    |                |
++-----------+-------------+------+-----+---------+----------------+
+2 rows in set (0.00 sec)
+
+mysql> insert into manager_reports(r_message) values("sample message");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> desc product;
+ERROR 1146 (42S02): Table 'project.product' doesn't exist
+mysql> desc products;
++------------------+-------------+------+-----+---------+----------------+
+| Field            | Type        | Null | Key | Default | Extra          |
++------------------+-------------+------+-----+---------+----------------+
+| product_id       | int         | NO   | PRI | NULL    | auto_increment |
+| product_name     | varchar(25) | NO   | UNI | NULL    |                |
+| product_desc     | varchar(50) | YES  |     | NULL    |                |
+| product_category | varchar(30) | YES  |     | NULL    |                |
+| product_price    | int         | YES  |     | NULL    |                |
+| product_quantity | int         | YES  |     | NULL    |                |
++------------------+-------------+------+-----+---------+----------------+
+6 rows in set (0.00 sec)
+
+mysql> desc customer;
++-------------------+-------------+------+-----+---------+-------+
+| Field             | Type        | Null | Key | Default | Extra |
++-------------------+-------------+------+-----+---------+-------+
+| customer_id       | int         | NO   | PRI | NULL    |       |
+| customer_username | varchar(25) | NO   | UNI | NULL    |       |
+| password          | varchar(30) | NO   |     | NULL    |       |
+| customer_email    | varchar(30) | YES  | UNI | NULL    |       |
+| customer_name     | varchar(50) | NO   |     | NULL    |       |
+| customer_address  | varchar(25) | YES  |     | NULL    |       |
++-------------------+-------------+------+-----+---------+-------+
+6 rows in set (0.00 sec)
+
+mysql> select * from manager;
++------------+------------------+-----------+------------------+-------------------+
+| manager_id | manager_username | password  | manager_email    | manager_name      |
++------------+------------------+-----------+------------------+-------------------+
+|       1111 | Sanket09         | Sanket123 | sanket@gmail.com | Sanket            |
+|       1112 | Shubham          | Shuham123 | Shubham          | shubham@gmail.com |
++------------+------------------+-----------+------------------+-------------------+
+2 rows in set (0.00 sec)
+
+mysql> show tables;
++-------------------+
+| Tables_in_project |
++-------------------+
+| admin             |
+| customer          |
+| manager           |
+| manager_reports   |
+| products          |
++-------------------+
+5 rows in set (0.00 sec)
+
+mysql> create table orders(o_id int primary key,product_id int,product_name varchar(25) not null,o_date date,customer_username varchar(25) not null,o_status varchar(50),isDelivered boolean,constraint p_id_fk foreign key(product_id) references products(product_id) on delete set null);
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> desc orders;
++-------------------+-------------+------+-----+---------+-------+
+| Field             | Type        | Null | Key | Default | Extra |
++-------------------+-------------+------+-----+---------+-------+
+| o_id              | int         | NO   | PRI | NULL    |       |
+| product_id        | int         | YES  | MUL | NULL    |       |
+| product_name      | varchar(25) | NO   |     | NULL    |       |
+| o_date            | date        | YES  |     | NULL    |       |
+| customer_username | varchar(25) | NO   |     | NULL    |       |
+| o_status          | varchar(50) | YES  |     | NULL    |       |
+| isDelivered       | tinyint(1)  | YES  |     | NULL    |       |
++-------------------+-------------+------+-----+---------+-------+
+7 rows in set (0.00 sec)
+
+mysql> create table customer_feedback(f_id int primary key,f_message varchar(60) not null);
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> desc customer_feedback();
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '()' at line 1
+mysql> desc customer_feedback;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| f_id      | int         | NO   | PRI | NULL    |       |
+| f_message | varchar(60) | NO   |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+
+mysql> alter table customer_feedback modify column f_id int auto_increment;
+Query OK, 0 rows affected (0.06 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table customer_feedback auto_increment=189;
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc customer_feedback;
++-----------+-------------+------+-----+---------+----------------+
+| Field     | Type        | Null | Key | Default | Extra          |
++-----------+-------------+------+-----+---------+----------------+
+| f_id      | int         | NO   | PRI | NULL    | auto_increment |
+| f_message | varchar(60) | NO   |     | NULL    |                |
++-----------+-------------+------+-----+---------+----------------+
+2 rows in set (0.00 sec)
+
+mysql> alter table orders modify column o_id int auto_increment;
+Query OK, 0 rows affected (0.09 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table orders auto_increment=112233;
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc orders;
++-------------------+-------------+------+-----+---------+----------------+
+| Field             | Type        | Null | Key | Default | Extra          |
++-------------------+-------------+------+-----+---------+----------------+
+| o_id              | int         | NO   | PRI | NULL    | auto_increment |
+| product_id        | int         | YES  | MUL | NULL    |                |
+| product_name      | varchar(25) | NO   |     | NULL    |                |
+| o_date            | date        | YES  |     | NULL    |                |
+| customer_username | varchar(25) | NO   |     | NULL    |                |
+| o_status          | varchar(50) | YES  |     | NULL    |                |
+| isDelivered       | tinyint(1)  | YES  |     | NULL    |                |
++-------------------+-------------+------+-----+---------+----------------+
+7 rows in set (0.00 sec)
+
+mysql> desc products;
++------------------+-------------+------+-----+---------+----------------+
+| Field            | Type        | Null | Key | Default | Extra          |
++------------------+-------------+------+-----+---------+----------------+
+| product_id       | int         | NO   | PRI | NULL    | auto_increment |
+| product_name     | varchar(25) | NO   | UNI | NULL    |                |
+| product_desc     | varchar(50) | YES  |     | NULL    |                |
+| product_category | varchar(30) | YES  |     | NULL    |                |
+| product_price    | int         | YES  |     | NULL    |                |
+| product_quantity | int         | YES  |     | NULL    |                |
++------------------+-------------+------+-----+---------+----------------+
+6 rows in set (0.00 sec)
+
+mysql> alter table customer_feedback add customer_username varchar(25);
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc customer_feedback;
++-------------------+-------------+------+-----+---------+----------------+
+| Field             | Type        | Null | Key | Default | Extra          |
++-------------------+-------------+------+-----+---------+----------------+
+| f_id              | int         | NO   | PRI | NULL    | auto_increment |
+| f_message         | varchar(60) | NO   |     | NULL    |                |
+| customer_username | varchar(25) | YES  |     | NULL    |                |
++-------------------+-------------+------+-----+---------+----------------+
+3 rows in set (0.00 sec)
+
+mysql> select * from customer;
+Empty set (0.00 sec)
+
+mysql> desc customer;
++-------------------+-------------+------+-----+---------+-------+
+| Field             | Type        | Null | Key | Default | Extra |
++-------------------+-------------+------+-----+---------+-------+
+| customer_id       | int         | NO   | PRI | NULL    |       |
+| customer_username | varchar(25) | NO   | UNI | NULL    |       |
+| password          | varchar(30) | NO   |     | NULL    |       |
+| customer_email    | varchar(30) | YES  | UNI | NULL    |       |
+| customer_name     | varchar(50) | NO   |     | NULL    |       |
+| customer_address  | varchar(25) | YES  |     | NULL    |       |
++-------------------+-------------+------+-----+---------+-------+
+6 rows in set (0.00 sec)
+
+mysql> desc orders;
++-------------------+-------------+------+-----+---------+----------------+
+| Field             | Type        | Null | Key | Default | Extra          |
++-------------------+-------------+------+-----+---------+----------------+
+| o_id              | int         | NO   | PRI | NULL    | auto_increment |
+| product_id        | int         | YES  | MUL | NULL    |                |
+| product_name      | varchar(25) | NO   |     | NULL    |                |
+| o_date            | date        | YES  |     | NULL    |                |
+| customer_username | varchar(25) | NO   |     | NULL    |                |
+| o_status          | varchar(50) | YES  |     | NULL    |                |
+| isDelivered       | tinyint(1)  | YES  |     | NULL    |                |
++-------------------+-------------+------+-----+---------+----------------+
+7 rows in set (0.00 sec)
+
+mysql> select * from customer_feedback;
++------+-----------+-------------------+
+| f_id | f_message | customer_username |
++------+-----------+-------------------+
+|  189 | Vivo      | Prem              |
+|  190 | 6         | Prem              |
++------+-----------+-------------------+
+2 rows in set (0.00 sec)
+
+mysql>  show tables;
++-------------------+
+| Tables_in_project |
++-------------------+
+| admin             |
+| customer          |
+| customer_feedback |
+| manager           |
+| manager_reports   |
+| orders            |
+| products          |
++-------------------+
+7 rows in set (0.00 sec)
+
+mysql> desc manager_reports;
++-----------+-------------+------+-----+---------+----------------+
+| Field     | Type        | Null | Key | Default | Extra          |
++-----------+-------------+------+-----+---------+----------------+
+| r_id      | int         | NO   | PRI | NULL    | auto_increment |
+| r_message | varchar(50) | NO   |     | NULL    |                |
++-----------+-------------+------+-----+---------+----------------+
+2 rows in set (0.00 sec)
+
+mysql> alter table manager_reports add manager_username varchar(25);
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc manager_reports;
++------------------+-------------+------+-----+---------+----------------+
+| Field            | Type        | Null | Key | Default | Extra          |
++------------------+-------------+------+-----+---------+----------------+
+| r_id             | int         | NO   | PRI | NULL    | auto_increment |
+| r_message        | varchar(50) | NO   |     | NULL    |                |
+| manager_username | varchar(25) | YES  |     | NULL    |                |
++------------------+-------------+------+-----+---------+----------------+
+3 rows in set (0.00 sec)
+
+mysql> select * from manager_reports;
++------+----------------+------------------+
+| r_id | r_message      | manager_username |
++------+----------------+------------------+
+| 5000 | sample message | NULL             |
++------+----------------+------------------+
+1 row in set (0.00 sec)
+
+mysql> delete from manager_reports
+    -> ;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from manager_reports;
+Empty set (0.00 sec)
+
+mysql> select * from manager;
++------------+------------------+-----------+------------------+--------------+
+| manager_id | manager_username | password  | manager_email    | manager_name |
++------------+------------------+-----------+------------------+--------------+
+|       1111 | Sanket09         | Sanket123 | sanket@gmail.com | Sanket       |
++------------+------------------+-----------+------------------+--------------+
+1 row in set (0.00 sec)
+
+mysql> select * from orders;
+Empty set (0.00 sec)
+
+mysql> ^C
+mysql>

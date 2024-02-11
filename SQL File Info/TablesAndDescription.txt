@@ -1,0 +1,130 @@
+Enter password: ****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 170
+Server version: 8.0.36 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2024, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| assignment         |
+| hr                 |
+| information_schema |
+| jdbchw             |
+| mydb               |
+| mysql              |
+| performance_schema |
+| project            |
+| sakila             |
+| sys                |
+| world              |
++--------------------+
+11 rows in set (0.00 sec)
+
+mysql> use project;
+Database changed
+mysql> show tables;
++-------------------+
+| Tables_in_project |
++-------------------+
+| admin             |
+| customer          |
+| customer_feedback |
+| manager           |
+| manager_reports   |
+| orders            |
+| products          |
++-------------------+
+7 rows in set (0.01 sec)
+
+mysql> desc admin;
++----------------+-------------+------+-----+---------+-------+
+| Field          | Type        | Null | Key | Default | Extra |
++----------------+-------------+------+-----+---------+-------+
+| admin_id       | int         | NO   | PRI | NULL    |       |
+| admin_username | varchar(25) | NO   | UNI | NULL    |       |
+| password       | varchar(30) | NO   |     | NULL    |       |
++----------------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> desc customer;
++-------------------+-------------+------+-----+---------+-------+
+| Field             | Type        | Null | Key | Default | Extra |
++-------------------+-------------+------+-----+---------+-------+
+| customer_id       | int         | NO   | PRI | NULL    |       |
+| customer_username | varchar(25) | NO   | UNI | NULL    |       |
+| password          | varchar(30) | NO   |     | NULL    |       |
+| customer_email    | varchar(30) | YES  | UNI | NULL    |       |
+| customer_name     | varchar(50) | NO   |     | NULL    |       |
+| customer_address  | varchar(25) | YES  |     | NULL    |       |
++-------------------+-------------+------+-----+---------+-------+
+6 rows in set (0.00 sec)
+
+mysql> desc customer_feedback;
++-------------------+-------------+------+-----+---------+----------------+
+| Field             | Type        | Null | Key | Default | Extra          |
++-------------------+-------------+------+-----+---------+----------------+
+| f_id              | int         | NO   | PRI | NULL    | auto_increment |
+| f_message         | varchar(60) | NO   |     | NULL    |                |
+| customer_username | varchar(25) | YES  |     | NULL    |                |
++-------------------+-------------+------+-----+---------+----------------+
+3 rows in set (0.00 sec)
+
+mysql> desc manager;
++------------------+-------------+------+-----+---------+-------+
+| Field            | Type        | Null | Key | Default | Extra |
++------------------+-------------+------+-----+---------+-------+
+| manager_id       | int         | NO   | PRI | NULL    |       |
+| manager_username | varchar(25) | NO   | UNI | NULL    |       |
+| password         | varchar(30) | NO   |     | NULL    |       |
+| manager_email    | varchar(30) | YES  | UNI | NULL    |       |
+| manager_name     | varchar(50) | NO   |     | NULL    |       |
++------------------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> desc manager_reports;
++------------------+-------------+------+-----+---------+----------------+
+| Field            | Type        | Null | Key | Default | Extra          |
++------------------+-------------+------+-----+---------+----------------+
+| r_id             | int         | NO   | PRI | NULL    | auto_increment |
+| r_message        | varchar(50) | NO   |     | NULL    |                |
+| manager_username | varchar(25) | YES  |     | NULL    |                |
++------------------+-------------+------+-----+---------+----------------+
+3 rows in set (0.00 sec)
+
+mysql> desc orders;
++-------------------+-------------+------+-----+---------+----------------+
+| Field             | Type        | Null | Key | Default | Extra          |
++-------------------+-------------+------+-----+---------+----------------+
+| o_id              | int         | NO   | PRI | NULL    | auto_increment |
+| product_id        | int         | YES  | MUL | NULL    |                |
+| product_name      | varchar(25) | NO   |     | NULL    |                |
+| o_date            | date        | YES  |     | NULL    |                |
+| customer_username | varchar(25) | NO   |     | NULL    |                |
+| o_status          | varchar(50) | YES  |     | NULL    |                |
+| isDelivered       | tinyint(1)  | YES  |     | NULL    |                |
++-------------------+-------------+------+-----+---------+----------------+
+7 rows in set (0.00 sec)
+
+mysql> desc products;
++------------------+-------------+------+-----+---------+----------------+
+| Field            | Type        | Null | Key | Default | Extra          |
++------------------+-------------+------+-----+---------+----------------+
+| product_id       | int         | NO   | PRI | NULL    | auto_increment |
+| product_name     | varchar(25) | NO   | UNI | NULL    |                |
+| product_desc     | varchar(50) | YES  |     | NULL    |                |
+| product_category | varchar(30) | YES  |     | NULL    |                |
+| product_price    | int         | YES  |     | NULL    |                |
+| product_quantity | int         | YES  |     | NULL    |                |
++------------------+-------------+------+-----+---------+----------------+
+6 rows in set (0.00 sec)
+
+mysql>
